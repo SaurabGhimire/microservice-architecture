@@ -42,6 +42,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+			<version>1.18.36</version> <!-- Use the latest version available -->
 			<optional>true</optional>
 		</dependency>
 		<dependency>
@@ -64,6 +65,17 @@
 			<artifactId>mongodb</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>5.5.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -76,6 +88,8 @@
 						<path>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
+							<version>1.18.36</version> <!-- Use the latest version available -->
+
 						</path>
 					</annotationProcessorPaths>
 				</configuration>
@@ -88,6 +102,8 @@
 						<exclude>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
+							<version>1.18.36</version> <!-- Use the latest version available -->
+
 						</exclude>
 					</excludes>
 				</configuration>
