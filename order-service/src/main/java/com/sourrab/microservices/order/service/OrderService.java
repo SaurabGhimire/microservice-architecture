@@ -2,7 +2,6 @@ package com.sourrab.microservices.order.service;
 
 import com.sourrab.microservices.order.client.InventoryClient;
 import com.sourrab.microservices.order.dto.OrderRequest;
-import com.sourrab.microservices.order.dto.OrderResponse;
 import com.sourrab.microservices.order.event.OrderPlacedEvent;
 import com.sourrab.microservices.order.model.Order;
 import com.sourrab.microservices.order.repository.OrderRepository;
@@ -34,7 +33,12 @@ public class OrderService {
             orderRepository.save(order);
 
             // Send the message to kafka topic
-            OrderPlacedEvent orderPlacedEvent = new OrderPlacedEvent(order.getOrderNumber(), orderRequest.userDetails().email());
+            OrderPlacedEvent orderPlacedEvent = new OrderPlacedEvent();
+            orderPlacedEvent.setOrderNumber(order.getOrderNumber());
+            orderPlacedEvent.setEmail(orderRequest.userDetails().email());
+            orderPlacedEvent.setFirstName(orderRequest.userDetails().firstName());
+            orderPlacedEvent.setLastName(orderRequest.userDetails().lastName());
+
             log.info("Start - Sending OrderPlacedEvent {} to Kafka topic order-placed", orderPlacedEvent);
             kafkaTemplate.send("order-placed", orderPlacedEvent);
             log.info("End - Sending OrderPlacedEvent {} to Kafka topic order-placed", orderPlacedEvent);
